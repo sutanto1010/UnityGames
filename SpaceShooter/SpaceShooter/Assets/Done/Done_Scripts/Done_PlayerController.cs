@@ -16,12 +16,17 @@ public class Done_PlayerController : MonoBehaviour
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
-	 
+
+	private Rigidbody playerRigidbody;
+
 	private float nextFire;
-	
+
+	void Start(){
+		playerRigidbody = GetComponent<Rigidbody>();
+	}
 	void Update ()
 	{
-		if (Input.GetButton("Fire1") && Time.time > nextFire) 
+		if (Time.time > nextFire) 
 		{
 			nextFire = Time.time + fireRate;
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -29,6 +34,24 @@ public class Done_PlayerController : MonoBehaviour
 		}
 	}
 
+	public void MovePlayer(float x, float y, float z){
+		Vector3 movement = new Vector3(x, y, z);
+		playerRigidbody.velocity = movement * speed;
+  }
+
+	public void StopMovement(){
+		playerRigidbody.velocity = playerRigidbody.position * 0;
+	}
+
+
+  public void SpeedUpFire(float speedUpTime)
+  {
+    if (fireRate >= 0.2f)
+      fireRate -= speedUpTime;
+  }
+
+
+	/*
 	void FixedUpdate ()
 	{
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -46,4 +69,6 @@ public class Done_PlayerController : MonoBehaviour
 		
 		GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
+  */
+	
 }

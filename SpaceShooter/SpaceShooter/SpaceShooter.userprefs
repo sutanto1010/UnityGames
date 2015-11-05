@@ -1,10 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TouchHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ApplicationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PanelManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TouchHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\Done\Done_Scripts\Done_PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Done\Done_Scripts\Done_GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Done\Done_Scripts\Done_Mover.cs" Line="1" Column="1" />
+      <File FileName="Assets\Done\Done_Scripts\Done_DestroyByContact.cs" Line="1" Column="1" />
+      <File FileName="Assets\Done\Done_Scripts\Done_DestroyByTime.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -4,17 +4,21 @@ using System.Collections;
 public class Done_GameController : MonoBehaviour
 {
 	public GameObject[] hazards;
-	public Vector3 spawnValues;
+	public GameObject[] bonuses;
+  public Vector3 spawnValues;
 	public int hazardCount;
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
+  public float bonusSpawnTime;//second
+  public float nextBonusSpawnTime;//second
 	
 	public GUIText scoreText;
-	public GUIText restartText;
 	public GUIText gameOverText;
-	
-	private bool gameOver;
+
+  public GameObject panelGameOver;
+
+  private bool gameOver;
 	private bool restart;
 	private int score;
 	
@@ -22,11 +26,12 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOver = false;
 		restart = false;
-		restartText.text = "";
 		gameOverText.text = "";
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
+    panelGameOver.SetActive(false);
+	  nextBonusSpawnTime = Time.time + bonusSpawnTime;
 	}
 	
 	void Update ()
@@ -45,19 +50,27 @@ public class Done_GameController : MonoBehaviour
 		yield return new WaitForSeconds (startWait);
 		while (true)
 		{
-			for (int i = 0; i < hazardCount; i++)
+      if (Time.time > nextBonusSpawnTime)
+      {
+        var bonusRandom = bonuses[Random.Range(0, bonuses.Length)];
+        Vector3 bonusSpawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+        Instantiate(bonusRandom, bonusSpawnPosition, Quaternion.identity);
+        nextBonusSpawnTime = Time.time + bonusSpawnTime;
+      }
+
+      for (int i = 0; i < hazardCount; i++)
 			{
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
-				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				Vector3 enemySpawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
+				Instantiate (hazard, enemySpawnPosition, spawnRotation);
+
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
 			
 			if (gameOver)
 			{
-				restartText.text = "Press 'R' for Restart";
 				restart = true;
 				break;
 			}
@@ -79,5 +92,6 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over!";
 		gameOver = true;
+    panelGameOver.SetActive(true);
 	}
 }
