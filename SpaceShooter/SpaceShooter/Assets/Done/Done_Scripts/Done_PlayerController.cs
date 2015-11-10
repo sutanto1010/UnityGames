@@ -34,24 +34,28 @@ public class Done_PlayerController : MonoBehaviour
 		}
 	}
 
-	public void MovePlayer(float x, float y, float z){
+	public void MovePlayer(float x, float y, float z)
+	{
 		Vector3 movement = new Vector3(x, y, z);
 		playerRigidbody.velocity = movement * speed;
-  }
+    }
 
-	public void StopMovement(){
+	public void StopMovement()
+	{
 		playerRigidbody.velocity = playerRigidbody.position * 0;
 	}
 
 
-  public void SpeedUpFire(float speedUpTime)
-  {
-    if (fireRate >= 0.2f)
-      fireRate -= speedUpTime;
-  }
+	public void SpeedUpFire(float speedUpTime)
+	{
+		if (fireRate >= 0.2f)
+			fireRate -= speedUpTime;
+		Done_Mover shotMover = shot.GetComponent<Done_Mover> ();
+		shotMover.speed = shotMover.speed + 2;
+	}
 
 
-	/*
+
 	void FixedUpdate ()
 	{
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -69,6 +73,7 @@ public class Done_PlayerController : MonoBehaviour
 		
 		GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
-  */
+
+  
 	
 }
